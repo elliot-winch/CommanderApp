@@ -56,7 +56,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: ad1f81ddd54db674496a972894aef539, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,14 +150,16 @@ MonoBehaviour:
   mLineRenderer: {fileID: 2502294986683475471}
   BeginTarget: {fileID: 0}
   EndTarget: {fileID: 0}
-  mBeginDistance: 0
-  mEndDistance: 0
-  mMinRenderDistance: 200
+  BeginDistance: 0
+  EndDistance: 0
+  MinRenderDistance: 0
   mAToBDamage: {fileID: 8703308730937299704}
   mBToADamage: {fileID: 1836820944919570277}
-  mAToBDamageDistance: 200
-  mBToADamageDistance: 200
-  mMinDamageDisplayRenderDistance: 400
+  mAToBDamageRect: {fileID: 8703308730937299711}
+  mBToADamageRect: {fileID: 1836820944919570274}
+  mArcWidthFactor: 0.1
+  mArcIntDisplayFactor: 0.75
+  mArcIntFontSizeFactor: 0.2
 --- !u!1001 &1465753833793076375
 PrefabInstance:
   m_ObjectHideFlags: 0

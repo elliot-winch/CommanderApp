@@ -23,13 +23,13 @@ public abstract class LerpTo<T>
         Lerp(startPosition, startPosition, onNewPosition);
     }
 
-    public void Lerp(T startPosition, T endPosition, Action<T> onNewPosition)
+    public void Lerp(T startPosition, T endPosition, Action<T> onNewPosition, Action onComplete = null)
     {
         StopLerp();
 
         Target = endPosition;
 
-        mCoroutine = mMono.StartCoroutine(LerpToCoroutine(startPosition, onNewPosition));
+        mCoroutine = mMono.StartCoroutine(LerpToCoroutine(startPosition, onNewPosition, onComplete));
     }
 
     public void StopLerp()
@@ -42,7 +42,7 @@ public abstract class LerpTo<T>
         mCoroutine = null;
     }
 
-    private IEnumerator LerpToCoroutine(T startPosition, Action<T> onNewPosition)
+    private IEnumerator LerpToCoroutine(T startPosition, Action<T> onNewPosition, Action onComplete)
     {
         T currentPosition = startPosition;
 
@@ -55,6 +55,7 @@ public abstract class LerpTo<T>
             yield return null;
         }
 
+        onComplete?.Invoke();
         mCoroutine = null;
     }
 
@@ -64,11 +65,13 @@ public abstract class LerpTo<T>
 
 public class LerpToVector2 : LerpTo<Vector2>
 {
+    public float Epsilon { get; set; } = Mathf.Epsilon;
+
     public LerpToVector2(MonoBehaviour mono, float lerpFactor) : base(mono, lerpFactor) { }
 
     protected override bool ContinueCondition(Vector2 current, Vector2 end)
     {
-        return Vector2.Distance(current, end) > Mathf.Epsilon;
+        return Vector2.Distance(current, end) > Epsilon;
     }
 
     protected override Vector2 LerpFunction(Vector2 current, Vector2 end, float factor)
@@ -80,11 +83,13 @@ public class LerpToVector2 : LerpTo<Vector2>
 
 public class LerpToFloat : LerpTo<float>
 {
+    public float Epsilon { get; set; } = Mathf.Epsilon;
+
     public LerpToFloat(MonoBehaviour mono, float lerpFactor) : base(mono, lerpFactor) { }
 
     protected override bool ContinueCondition(float current, float end)
     {
-        return Mathf.Abs(current - end) > Mathf.Epsilon;
+        return Mathf.Abs(current - end) > Epsilon;
     }
 
     protected override float LerpFunction(float current, float end, float factor)

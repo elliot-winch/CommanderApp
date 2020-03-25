@@ -1,0 +1,13 @@
+TODOs:
+
+1) Fix Commander Damage Buttons:
+Pressing on the commander damage sometimes fails. This is because
+the node is over the top of the button for commander damage. Do 
+something cool with layers, or render the button lower in the 
+hierarchy than the visuals (annoying bc then we have to break up the prefab's hierarchy).
+Needs googling but I'm on the plane
+
+2) Colour gradient in UI image?
+We can use fill for now
+
+3) BUG: Background hides line renderers?

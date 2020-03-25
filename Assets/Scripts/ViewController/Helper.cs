@@ -2,6 +2,17 @@
 
 public static class Helper
 {
+    /// <summary>
+    /// Converts a number of pixels into a distance in world space
+    /// </summary>
+    /// <param name="canvasPixels"></param>
+    /// <returns></returns>
+    public static float CanvasToWorldScale(float canvasPixels)
+    {
+        float canvasWorldSize = Vector3.Distance(CanvasToWorldSpace(Vector2.zero), CanvasToWorldSpace(new Vector2(Screen.width, 0f)));
+        return canvasPixels * canvasWorldSize / Screen.width;
+    }
+
     public static Vector3 CanvasToWorldSpace(Vector2 canvasPosition)
     {
         Vector2 worldPosition = Camera.main.ScreenToWorldPoint(canvasPosition);
